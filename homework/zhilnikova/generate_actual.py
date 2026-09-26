@@ -22,7 +22,8 @@ L, C, J = (WD_ALIGN_PARAGRAPH.LEFT, WD_ALIGN_PARAGRAPH.CENTER,
            WD_ALIGN_PARAGRAPH.JUSTIFY)
 
 
-def title_page(doc):
+def title_page(doc, title="Актуализация концептуального аппарата выпускной "
+               "квалификационной работы и ее плана"):
     h.configure(doc)
     add = h.add_centered
     add(doc, "МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ",
@@ -45,8 +46,7 @@ def title_page(doc):
                       bottom_right="инициалы, фамилия")
     for _ in range(2):
         h.add_par(doc, "", size=12)
-    add(doc, "Актуализация концептуального аппарата выпускной "
-             "квалификационной работы и ее плана", line_spacing=1.15)
+    add(doc, title, line_spacing=1.15)
     h.add_par(doc, "", size=12)
     add(doc, "по дисциплине: Научно-исследовательская работа", line_spacing=1.15)
     for _ in range(3):
@@ -63,7 +63,8 @@ def title_page(doc):
 
 
 def head(doc, text, first=False):
-    h.heading(doc, text, space_before=0 if first else 10)
+    p = h.heading(doc, text, space_before=0 if first else 10)
+    p.paragraph_format.keep_with_next = True
 
 
 def body(doc, text):
